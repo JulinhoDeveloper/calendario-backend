@@ -4,8 +4,8 @@ mongoose
 express-validator
 npm i bcrypt
 npm i  jsonwebtoken
+moment
 cors
-
 npm i nodemon
 
 

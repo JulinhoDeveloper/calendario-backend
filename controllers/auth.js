@@ -2,7 +2,7 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
 const { generarJWT } = require('../helpers/jwt');
-
+ 
 const crearUsuario = async(req, res = response ) => {
 
     const { email, password } = req.body;
@@ -13,7 +13,7 @@ const crearUsuario = async(req, res = response ) => {
         if ( usuario ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'E-mail já cadastrado'
+                msg: 'Esse e-mail já está cadastrado'
             });
         }
 
@@ -45,6 +45,7 @@ const crearUsuario = async(req, res = response ) => {
     }
 }
 
+
 const loginUsuario = async(req, res = response ) => {
 
     const { email, password } = req.body;
@@ -56,7 +57,7 @@ const loginUsuario = async(req, res = response ) => {
         if ( !usuario ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'E-mail já cadastrado'
+                msg: 'Esse email já existe'
             });
         }
 
@@ -85,17 +86,18 @@ const loginUsuario = async(req, res = response ) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Por favor fale com administrador'
+            msg: 'Por favor fale com o administrador'
         });
     }
 
 }
 
+
 const revalidarToken = async (req, res = response ) => {
 
     const { uid, name } = req;
 
-    // Gerar JWT
+    // Generar JWT
     const token = await generarJWT( uid, name );
 
     res.json({
@@ -103,6 +105,9 @@ const revalidarToken = async (req, res = response ) => {
         token
     })
 }
+
+
+
 
 module.exports = {
     crearUsuario,

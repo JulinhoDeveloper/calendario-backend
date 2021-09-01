@@ -1,16 +1,22 @@
-const express = require('express');
-const {Router} = require('express');
+/*
+    Rotas de Usuarios / Auth
+    host + /api/auth
+*/
+const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth');
+const { validarJWT } = require('../middlewares/validar-jwt');
+
+
 const router = Router();
 
-const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth');
 
 
 router.post(
     '/new', 
     [ // middlewares
-        check('name', 'O nome é ogrigatório').not().isEmpty(),
+        check('name', 'O nome é obrigatório').not().isEmpty(),
         check('email', 'O email é obrigatório').isEmail(),
         check('password', 'A senha deve ter 6 caracteres').isLength({ min: 6 }),
         validarCampos
@@ -28,6 +34,10 @@ router.post(
     loginUsuario 
 );
 
-router.post('/renew', revalidarToken );
+
+router.get('/renew', validarJWT ,revalidarToken );
+
+
+
 
 module.exports = router;
