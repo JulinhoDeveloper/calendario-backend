@@ -1,0 +1,15 @@
+{
+  "name": "app",
+  "version": "1.0.1",
+  "description": "projeto calendário",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "juiodevfullstack@gmail.com"
+  },
+  "author": "Julio Cesar",
+  "license": "ISC"
+}
