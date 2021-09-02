@@ -20,7 +20,7 @@ app.use( express.json() );
 
 // Rotas
 app.use('/api/auth', require('./routes/auth') );
-
+app.use('/api/eventos', require('./routes/eventos') );
 
 
 
